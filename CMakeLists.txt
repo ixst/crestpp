@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
 
 project(
-    chttpp
+    crestpp
     VERSION 0.0.0
-    DESCRIPTION "cpp http client lib"
+    DESCRIPTION "cpp rest api lib"
     LANGUAGES CXX
-    HOMEPAGE_URL "https://github.com/ixst/chttpp"
+    HOMEPAGE_URL "https://github.com/ixst/crestpp"
 )
 
 set(CMAKE_CXX_FLAGS -Wall)
@@ -27,5 +27,5 @@ include_directories(
 
 add_subdirectory(src)
 add_subdirectory(test)
-add_subdirectory(app)
+#add_subdirectory(example)
 

@@ -4,6 +4,8 @@ endif()
 
 file(GLOB_RECURSE SOURCES *.cc)
 
-add_library(chttpp SHARED ${SOURCES})
+add_library(crestpp SHARED ${SOURCES})
 
-target_link_libraries(chttpp gcov)
+if(CMAKE_BUILD_TYPE STREQUAL Coverage) 
+  target_link_libraries(crestpp gcov)
+endif()
