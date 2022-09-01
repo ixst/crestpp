@@ -1,5 +1,5 @@
-#ifndef CREASTPP_HEADER_CUSTOM_HH__
-#define CREASTPP_HEADER_CUSTOM_HH__
+#ifndef CRESTPP_HEADER_CONTENT_LENGTH_HH__
+#define CRESTPP_HEADER_CONTENT_LENGTH_HH__
 
 #include <string>
 
@@ -9,12 +9,12 @@
 namespace crestpp {
 namespace header {
 
-class Custom : public Header {
+class ContentLength : public Header {
 public:
-  const std::string value;
+  int value;
 
 public:
-  Custom(std::string name, std::string value) noexcept;
+  ContentLength(int value) noexcept;
 
 public:
   std::string serialized_value() const noexcept override;

@@ -11,7 +11,7 @@ public:
   const std::string name;
 
 public:
-  virtual std::string value() const noexcept = 0;
+  virtual std::string serialized_value() const noexcept = 0;
 
 protected:
   Header(std::string name) noexcept;
