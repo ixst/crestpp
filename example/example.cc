@@ -25,9 +25,9 @@ public:
         req.headers =
           header::AcceptEncoding(
               { 
-                  encoding::br,
-                  encoding::gzip,
-                  encoding::deflate
+                  Encoding::br,
+                  Encoding::gzip,
+                  Encoding::deflate
               }
           ) +
           header::Accept( 
