@@ -2,18 +2,21 @@
 
 #include "crestpp/session.hh"
 
-class Api {
+class App {
 public:
-  Api() noexcept {
+  Api test;
+
+public:
+  App() noexcept {
     auto session = crestpp::Session::Builder()
       .host("example.com")
       .protocols(
           {
-              { protocol::h1, 443 }, 
-              { protocol::h1c, 80 },
-              { protocol::h2, 443 }, 
-              { protocol::h2c, 80 }, 
-              { protocol::h3, 443 }
+              { Protocol::h1, Protocol::h1.port }, 
+              { Protocol::h1c, Protocol::h1c.port },
+              { Protocol::h2, Protocol::h2.port },
+              { Protocol::h2c, Protocol::h2c.port },
+              { Protocol::h3, Protocol::h3.port },
           }
       )
       .Build();
