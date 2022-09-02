@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "crestpp/session.hh"
+#include "crestpp/well_known_port.hh"
 
 
 using namespace crestpp;
@@ -13,14 +14,8 @@ public:
   App() noexcept {
     auto session = SecureSession::Builder()
       .host("example.com")
-      .port(Port::https),
-      .protocol_negotiation(
-          {
-              Protocol::h1, 
-              Protocol::h2,
-              Protocol::h3,
-          }
-      )
+      .port(WellKnownPort::https),
+      .protocols({ Protocol::h1, Protocol::h2, Protocol::h3 })
       .Build();
     test = session.Get("/test", [&](auto& req) noexcept {
         auto& query = req.query;
