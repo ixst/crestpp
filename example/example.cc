@@ -13,12 +13,12 @@ public:
   App() noexcept {
     auto session = SecureSession::Builder()
       .host("example.com")
-      .port( WellKnownPort::https ),
+      .port(Port::https),
       .protocol_negotiation(
           {
-              { Protocol::h1 }, 
-              { Protocol::h2 },
-              { Protocol::h3 },
+              Protocol::h1, 
+              Protocol::h2,
+              Protocol::h3,
           }
       )
       .Build();
