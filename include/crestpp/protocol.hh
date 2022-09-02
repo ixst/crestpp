@@ -1,17 +1,17 @@
 #ifndef CRESTPP_PROTOCOL_HH__
 #define CRESTPP_PROTOCOL_HH__
 
+#include <string>
+
 
 namespace crestpp {
 
 class Protocol {
 public:
-  const int& port;
+  const std::string& name;
 
 public:
-  static const Protocol h1c;
   static const Protocol h1;
-  static const Protocol h2c;
   static const Protocol h2;
   static const Protocol h3;
 
@@ -21,17 +21,15 @@ public:
 private:
   class Impl {
   public:
-    const int port;
+    const std::string name;
 
   private:
-    static const Impl h1c;
     static const Impl h1;
-    static const Impl h2c;
     static const Impl h2;
     static const Impl h3;
 
   private:
-    Impl(int port) noexcept;
+    Impl(std::string name) noexcept;
 
   friend class Protocol;
 
