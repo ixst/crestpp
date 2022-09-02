@@ -1,15 +1,15 @@
 #include "gtest/gtest.h"
-#include "crestpp/session.hh"
+#include "crestpp/cleartext_session.hh"
 
 
 using namespace crestpp;
 
-TEST(Session, Builder) {
+TEST(CleartextSession, Builder) {
   std::string host = "example.com";
   int port = 80;
-  Protocol protocol = Protocol::h1;
+  auto protocol = Protocol::h1;
   { 
-    auto session = Session::Builder(host)
+    auto session = CleartextSession::Builder(host)
         .port(port)
         .protocols({ protocol })
         .Build();
@@ -21,7 +21,7 @@ TEST(Session, Builder) {
   }
   { 
     int port = 80;
-    auto session = Session::Builder(host).Build();
+    auto session = CleartextSession::Builder(host).Build();
     
     EXPECT_EQ(session.port, port);
     EXPECT_EQ(session.protocols.size(), 1);

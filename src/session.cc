@@ -3,7 +3,16 @@
 
 namespace crestpp {
 
-Session::Session(
+Session::Session(std::shared_ptr<Impl> impl) noexcept
+    : host(impl->host),
+      port(impl->port),
+      protocols(impl->protocols),
+      impl_(std::move(impl))
+{}
+
+
+
+Session::Impl::Impl(
     std::string host,
     int port,
     std::vector<Protocol> protocols
@@ -12,29 +21,5 @@ Session::Session(
       port(port),
       protocols(std::move(protocols))
 {}
-
-
-
-Session::Builder::Builder(std::string host) noexcept 
-    : host_(std::move(host)),
-      port_(80),
-      protocols_({ Protocol::h1 })
-{}
-
-Session::Builder& Session::Builder::port(int port) noexcept {
-  port_ = port;
-  return *this;
-}
-
-Session::Builder& Session::Builder::protocols(
-    std::vector<Protocol> protocols
-) noexcept {
-  protocols_ = std::move(protocols);
-  return *this;
-}
-
-Session Session::Builder::Build() noexcept {
-  return Session(host_, port_, protocols_);
-}
 
 }
