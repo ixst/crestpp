@@ -12,7 +12,6 @@ namespace crestpp {
 
 class Session {
 public:
-  class Impl;
   template <class T>
   class Builder;
 
@@ -21,29 +20,16 @@ public:
   const int& port;
   const std::vector<Protocol>& protocols;
 
-public:
+protected:
+  class Impl;
+
+protected:
   Session(std::shared_ptr<Impl> impl) noexcept;
 
 protected:
   std::shared_ptr<Impl> impl_;
 
 };
-
-class Session::Impl {
-public:
-  std::string host;
-  int port;
-  std::vector<Protocol> protocols;
-
-protected:
-  Impl(
-      std::string host,
-      int port,
-      std::vector<Protocol> protocols
-  ) noexcept;
-
-};
-
 
 template <class T>
 class Session::Builder {

@@ -13,21 +13,15 @@ namespace crestpp {
 
 class CleartextSession : public Session {
 public:
-  class Impl;
   class Builder;
 
-public:
+private:
+  class Impl;
+
+private:
   CleartextSession(std::shared_ptr<Impl> impl) noexcept;
 
-};
-
-class CleartextSession::Impl : public Session::Impl {
-public:
-  Impl(
-      std::string host,
-      int port,
-      std::vector<Protocol> protocols
-  ) noexcept;
+friend Builder;
 
 };
 
