@@ -6,9 +6,15 @@ namespace crestpp {
 CleartextSession::Impl::Impl(
     std::string host,
     int port,
-    std::vector<Protocol> protocols
+    std::vector<Protocol> protocols,
+    Path base_path
 ) noexcept 
-    : Session::Impl(std::move(host), port, std::move(protocols))
+    : Session::Impl(
+          std::move(host), 
+          port, 
+          std::move(protocols),
+          std::move(base_path)
+      )
 {}
 
 }

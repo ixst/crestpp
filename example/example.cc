@@ -15,8 +15,9 @@ public:
     auto session = SecureSession::Builder("example.com")
         .port(WellKnownPort::https),
         .protocols({ Protocol::h1, Protocol::h2, Protocol::h3 })
+        .base_path("/")
         .Build();
-    test = session.Get("/test", [&](auto& req) noexcept {
+    test = session.Get("test", [&](auto& req) noexcept {
         auto& query = req.query;
         req.headers =
           header::AcceptEncoding(

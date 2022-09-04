@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "protocol.hh"
+#include "path.hh"
 
 
 namespace crestpp {
@@ -19,6 +20,7 @@ public:
   const std::string& host;
   const int& port;
   const std::vector<Protocol>& protocols;
+  const Path base_path;
 
 protected:
   class Impl;
@@ -42,6 +44,10 @@ public:
     protocols_ = std::move(protocols);
     return *static_cast<T::Builder*>(this);
   }
+  T::Builder& base_path(Path path) noexcept {
+    base_path_ = std::move(path);
+    return *static_cast<T::Builder*>(this);
+  }
 
 public:
   virtual T Build() const noexcept = 0;
@@ -50,6 +56,7 @@ protected:
   std::string host_;
   int port_;
   std::vector<Protocol> protocols_;
+  Path base_path_;
 
 protected:
   Builder(
@@ -59,7 +66,8 @@ protected:
   ) noexcept 
       : host_(std::move(host)),
         port_(default_port),
-        protocols_({ default_protocol })
+        protocols_({ default_protocol }),
+        base_path_("/")
   {}
 
 };

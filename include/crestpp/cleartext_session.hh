@@ -5,7 +5,6 @@
 #include <vector>
 #include <memory>
 
-#include "protocol.hh"
 #include "session.hh"
 
 

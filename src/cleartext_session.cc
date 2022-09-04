@@ -17,7 +17,12 @@ CleartextSession::Builder::Builder(std::string host) noexcept
 
 CleartextSession CleartextSession::Builder::Build() const noexcept {
   return { 
-      std::make_shared<CleartextSession::Impl>(host_, port_, protocols_) 
+      std::make_shared<CleartextSession::Impl>(
+          host_, 
+          port_, 
+          protocols_, 
+          base_path_
+      ) 
   };
 }
 
