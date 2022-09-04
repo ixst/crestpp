@@ -13,9 +13,32 @@ public:
 
 };
 
-TEST(Api, constructor) {
-  auto session_impl = std::make_shared<MockSessionImpl>();
-  auto api = Api("echo", session_impl);
+auto session_impl = std::make_shared<MockSessionImpl>();
+
+TEST(Api, constructor1) {
+  auto api = Api(session_impl, "echo");
   EXPECT_EQ(api.path, "/base/echo");
 }
 
+TEST(Api, constructor2) {
+  auto api = Api(
+      session_impl,
+      "echo", 
+      [&](auto& req) noexcept {
+        req.path << 1;
+        EXPECT_EQ(req.path, "/base/echo/1");
+      }
+  );
+}
+
+TEST(Api, functor) {
+  auto echo = Api(session_impl, "echo");
+  echo(
+      [&](const auto& res) {
+
+      },
+      [&](const auto& error) {
+
+      }
+  );
+}

@@ -17,33 +17,36 @@ public:
         .protocols({ Protocol::h1, Protocol::h2, Protocol::h3 })
         .base_path("/")
         .Build();
-    test = session.Get("test", [&](auto& req) noexcept {
-        auto& query = req.query;
-        req.headers =
-          header::AcceptEncoding(
-              { 
-                  Encoding::br,
-                  Encoding::gzip,
-                  Encoding::deflate
-              }
-          ) +
-          header::Accept( 
-              { 
-                  mimetype::text.html,
-                  mimetype::application.xml,
-              }
-          )
-        req.body = Stream(
-            [&](const auto& stream) noexcept {
-              std::string text;
-              text.reserve(1024);
-              memset(text.data(), 'A', 1024);
-              for(int i = 0; i < 100; i++) {
-                stream << buffer;
-              }
-            }
-        );
-      }   
+    test = session.Get(
+        "test", 
+        [&](auto& req) noexcept {
+            auto& query = req.query;
+            req.headers =
+              header::AcceptEncoding(
+                  { 
+                      Encoding::br,
+                      Encoding::gzip,
+                      Encoding::deflate
+                  }
+              ) +
+              header::Accept( 
+                  { 
+                      mimetype::text.html,
+                      mimetype::application.xml,
+                  }
+              )
+            req.body = Stream(
+                [&](const auto& stream) noexcept {
+                  std::string text;
+                  text.reserve(1024);
+                  memset(text.data(), 'A', 1024);
+                  for(int i = 0; i < 100; i++) {
+                    stream << buffer;
+                  }
+                }
+            );
+        }   
+    );
   }
 
 };
