@@ -5,6 +5,10 @@
 
 namespace crestpp {
 
+Path::Path(const char* path) noexcept 
+    : Path(std::string(path))
+{}
+
 Path::Path(std::string path) noexcept 
     : Path(Parse(std::move(path)))
 {}
@@ -38,6 +42,14 @@ Path& Path::Append(Path path) noexcept {
   return *this;
 }
 
+bool Path::operator==(const char* path) const noexcept {
+  return *this == std::string(path);
+}
+
+bool Path::operator==(const std::string& path) const noexcept {
+  return *this == Parse(path);
+}
+
 bool Path::operator==(const Path& path) const noexcept {
   if(nodes_.size() != path.nodes_.size()) {
     return false;
@@ -50,10 +62,6 @@ bool Path::operator==(const Path& path) const noexcept {
     }
   }
   return true;
-}
-
-bool Path::operator==(const std::string& text) const noexcept {
-  return *this == Parse(text);
 }
 
 Path Path::Parse(std::string text) noexcept {

@@ -10,6 +10,7 @@ namespace crestpp {
 
 class Path {
 public:
+  Path(const char* path) noexcept;
   Path(std::string path) noexcept;
   Path(std::list<std::string> nodes) noexcept;
 
@@ -33,8 +34,9 @@ public:
     return Append(t);
   }
 
-  bool operator==(const Path& path) const noexcept;
+  bool operator==(const char* path) const noexcept;
   bool operator==(const std::string& path) const noexcept;
+  bool operator==(const Path& path) const noexcept;
 
 private:
   std::list<std::string> nodes_;
