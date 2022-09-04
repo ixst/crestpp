@@ -1,9 +1,9 @@
-#include "session_impl.hh"
+#include "crestpp/session_impl.hh"
 
 
 namespace crestpp {
 
-Session::Impl::Impl(
+SessionImpl::SessionImpl(
       std::string host,
       int port,
       std::vector<Protocol> protocols,

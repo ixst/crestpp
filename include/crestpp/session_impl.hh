@@ -4,14 +4,13 @@
 #include <string>
 #include <vector>
 
-#include "crestpp/session.hh"
-#include "crestpp/protocol.hh"
-#include "crestpp/path.hh"
+#include "protocol.hh"
+#include "path.hh"
 
 
 namespace crestpp {
 
-class Session::Impl {
+class SessionImpl {
 public:
   std::string host;
   int port;
@@ -19,7 +18,7 @@ public:
   Path base_path;
 
 protected:
-  Impl(
+  SessionImpl(
       std::string host,
       int port,
       std::vector<Protocol> protocols,

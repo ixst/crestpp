@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "session_impl.hh"
+#include "crestpp/session_impl.hh"
 #include "crestpp/path.hh"
 #include "crestpp/protocol.hh"
 #include "crestpp/cleartext_session.hh"

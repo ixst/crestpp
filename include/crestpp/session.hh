@@ -7,6 +7,7 @@
 
 #include "protocol.hh"
 #include "path.hh"
+#include "session_impl.hh"
 
 
 namespace crestpp {
@@ -23,7 +24,7 @@ public:
   const Path base_path;
 
 protected:
-  class Impl;
+  using Impl = SessionImpl;
 
 protected:
   Session(std::shared_ptr<Impl> impl) noexcept;

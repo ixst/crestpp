@@ -1,6 +1,6 @@
 #include "crestpp/session.hh"
 
-#include "session_impl.hh"
+#include "crestpp/session_impl.hh"
 
 
 namespace crestpp {
