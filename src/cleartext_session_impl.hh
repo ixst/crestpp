@@ -3,10 +3,13 @@
 
 #include <string>
 #include <vector>
+#include <future>
 
 #include "crestpp/session_impl.hh"
 #include "crestpp/path.hh"
 #include "crestpp/protocol.hh"
+#include "crestpp/response.hh"
+#include "crestpp/request.hh"
 #include "crestpp/cleartext_session.hh"
 
 
@@ -20,6 +23,18 @@ public:
       std::vector<Protocol> protocols,
       Path base_path
   ) noexcept;
+
+public:
+  void Enqueue(
+      Request req, 
+      std::promise<Response>& promise
+  ) noexcept override;
+
+  void Enqueue(
+      Request req,
+      std::function<void(const Response&)> on_response,
+      std::function<void(const Error&)> on_error
+  ) noexcept override;
 
 };
 

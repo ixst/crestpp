@@ -17,19 +17,16 @@ CleartextSession::Impl::Impl(
       )
 {}
 
-void CleartextSession::Impl::Enqueue(
-    Request req,
-    std::promise<Response>& promise
-) noexcept {
-  //TODO
+std::future<Response> CleartextSession::Enqueue(Request& req) noexcept {
+  
 }
 
-void CleartextSession::Impl::Enqueue(
-    Request req,
+void CleartextSession::Enqueue(
+    Request& req,
     std::function<void(const Response&)> on_response,
-    std::function<void(const Error&)> on_error
+    std::function<void(const Error&) on_error
 ) noexcept {
-  //TODO
+
 }
 
 }

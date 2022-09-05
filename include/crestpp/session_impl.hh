@@ -3,9 +3,13 @@
 
 #include <string>
 #include <vector>
+#include <future>
 
 #include "protocol.hh"
 #include "path.hh"
+#include "request.hh"
+#include "response.hh"
+#include "error.hh"
 
 
 namespace crestpp {
@@ -16,6 +20,17 @@ public:
   int port;
   std::vector<Protocol> protocols;
   Path base_path;
+
+public:
+  virtual void Enqueue(
+      Request req,
+      std::promise<Response>& promise
+  ) noexcept = 0;
+  virtual void Enqueue(
+      Request req,
+      std::function<void(const Response&)> on_response,
+      std::function<void(const Error&)> on_error
+  ) noexcept = 0;
 
 protected:
   SessionImpl(

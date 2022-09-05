@@ -52,22 +52,34 @@ public:
 };
 
 int main(int argc, char** argv) {
+  App app;
   {
     std::string content;
-    session.test(
+    auto future = app.test();
+    try {
+      auto res = future.get();
+      res.body
+    } catch (...) {
+      std::cout << what() << std::endl;
+    }
+  }
+
+  {
+    std::string content;
+    app.test(
         [&](const auto& res) noexcept {
           const auto& status = res.status;
           const auto& headers = res.headers;
           const auto& body = res.body;
           auto future = body.future();
           auto text = future.get();
-        } 
+        }
     );
   }
 
   {
     std::stringstream sout;
-    session.test(
+    app.test(
         [&](const auto& res) noexcept {
           const auto& status = res.status;
           const auto& headers = res.headers;
@@ -78,7 +90,7 @@ int main(int argc, char** argv) {
               }
           );
         } 
-    ).Wait();
+    )
   }
       
   return 0;

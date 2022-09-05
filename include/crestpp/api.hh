@@ -22,23 +22,27 @@ public:
   Api(
       const std::shared_ptr<SessionImpl> session_impl,
       Path path,
-      std::function<void(Request& req)> on_request) noexcept;
+      std::function<void(Request&)> on_request
+  ) noexcept;
   Api(const std::shared_ptr<SessionImpl> session_impl, Path path) noexcept;
 
 public:
-  void operator()(
-      std::function<void(Request& req)> on_request,
-      std::function<void(const Response& res)> on_response,
-      std::function<void(const Error& error)> on_error
+  std::future<Response> operator()(
+      const std::function<void(Request&)>& on_request
   ) noexcept;
   void operator()(
-      std::function<void(const Response& res)> on_response,
-      std::function<void(const Error& error)> on_error
+      const std::function<void(Request&)>& on_request,
+      std::function<void(const Response&)> on_response,
+      std::function<void(const Error&)> on_error
+  ) noexcept;
+  void operator()(
+      std::function<void(const Response&)> on_response,
+      std::function<void(const Error&)> on_error
   ) noexcept;
 
 private:
   std::shared_ptr<SessionImpl> session_impl_;
-  std::function<void(Request& req)> on_request_;
+  std::function<void(Request&)> on_request_;
 
 };
 
